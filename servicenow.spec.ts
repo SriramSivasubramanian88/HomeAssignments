@@ -59,7 +59,7 @@ test.describe('ServiceNow Service Catalog',()=>{
             await mainFrame.getByRole('textbox', { name: '   What was the original' }).fill(serviceNowData.originalPhoneNum);
             await mainFrame.locator(`select[name="IO:33494b069747011021983d1e6253af45"]`).selectOption({ value: serviceNowData.MonthlyAllowance})
             await mainFrame.getByText(serviceNowData.color).click();
-            await mainFrame.getByText(new RegExp(serviceNowData.storage)).last().click();
+            await mainFrame.locator('label').filter({ hasText: new RegExp(serviceNowData.storage) }).last().click();
             const orderNowBtn=mainFrame.getByRole('button', { name: 'Order Now' });
             await expect(orderNowBtn).toBeEnabled();
             await orderNowBtn.click();
