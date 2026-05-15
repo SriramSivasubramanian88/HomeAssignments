@@ -64,7 +64,7 @@ test.describe('ServiceNow Service Catalog',()=>{
             await expect(orderNowBtn).toBeEnabled();
             await orderNowBtn.click();
             await page.pause();
-            await expect(mainFrame.getByText('Thank you, your request has'))
+            await expect(mainFrame.getByText('Thank you, your request has')).toBeVisible();
             const screenshotFileName=`order.png`;
             console.log(`Screenshot saved to ${screenshotFileName}`);
             
