@@ -50,8 +50,10 @@ test.describe('ServiceNow Service Catalog',()=>{
             const mainFrame = page.frameLocator(`iframe[name="gsft_main"]`)           
             await expect(mainFrame.getByText('GO FURTHER')).toBeVisible();
             await page.getByRole('menuitem', { name: 'All' }).click();
-            await page.locator('.item-icon').filter({ hasText: 'Service Catalog' }).click()
-            await mainFrame.getByRole('link', { name: 'Mobiles. Cell phones to meet your business needs.', exact: true }).click();
+            await page.locator('.item-icon').filter({ hasText: 'Service Catalog' }).click();
+            const mobiles=mainFrame.getByRole('link', { name: 'Mobiles. Cell phones to meet your business needs.', exact: true });
+            await expect(mobiles).toBeVisible();
+            await mobiles.click();            
             const prod=mainFrame.getByRole('link', { name: serviceNowData.product , exact: true });
             await expect(prod).toBeVisible();
             await prod.click();
@@ -63,7 +65,6 @@ test.describe('ServiceNow Service Catalog',()=>{
             const orderNowBtn=mainFrame.getByRole('button', { name: 'Order Now' });
             await expect(orderNowBtn).toBeEnabled();
             await orderNowBtn.click();
-            await page.pause();
             await expect(mainFrame.getByText('Thank you, your request has')).toBeVisible();
             const screenshotFileName=`order.png`;
             console.log(`Screenshot saved to ${screenshotFileName}`);
